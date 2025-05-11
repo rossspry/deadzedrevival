@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: deadzedrevival-backend
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+    rootDir: backend
+
+  - type: static
+    name: deadzedrevival-frontend
+    env: static
+    plan: free
+    buildCommand: ""
+    staticPublishPath: frontend
+    autoDeploy: true
