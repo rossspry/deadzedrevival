@@ -1,4 +1,3 @@
-// Static list of horses: ID → Display name
 const horses = {
   "100623": "Atlantic Records",
   "118226": "Purple Moon Rising",
@@ -8,7 +7,6 @@ const horses = {
   "156512": "Sir LetsGoBrandon"
 };
 
-// Render checkboxes for each horse
 function populateHorseSelector() {
   const picker = document.getElementById('horsePicker');
   picker.innerHTML = '';
@@ -28,13 +26,29 @@ function populateHorseSelector() {
   }
 }
 
-// Helper to collect selected IDs
 function getSelectedHorseIds() {
   const checkboxes = document.querySelectorAll('input[name="horse"]:checked');
   return Array.from(checkboxes).map(cb => cb.value);
 }
 
-// Send race request to backend and show results
+function renderLanes(participants, winner) {
+  const lanes = document.getElementById('raceLanes');
+  lanes.innerHTML = ''; // clear previous
+
+  participants.forEach(name => {
+    const lane = document.createElement('div');
+    lane.className = 'lane';
+    lane.textContent = name;
+
+    if (name === winner) {
+      lane.classList.add('winner');
+      lane.textContent += ' 🏆';
+    }
+
+    lanes.appendChild(lane);
+  });
+}
+
 async function runRace() {
   const selectedIds = getSelectedHorseIds();
 
@@ -53,10 +67,11 @@ async function runRace() {
     const data = await response.json();
 
     if (response.ok) {
+      renderLanes(data.participants, data.winner);
+
       document.getElementById('raceResult').innerHTML = `
         <h2>Race Completed</h2>
         <p><strong>Winner:</strong> ${data.winner}</p>
-        <p><strong>Participants:</strong> ${data.participants.join(', ')}</p>
       `;
 
       document.getElementById('winnerPhoto').innerHTML = `
@@ -71,5 +86,4 @@ async function runRace() {
   }
 }
 
-// Run when DOM is ready
 document.addEventListener('DOMContentLoaded', populateHorseSelector);
