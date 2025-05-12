@@ -1,15 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 const port = process.env.PORT || 3000;
 
-const corsOptions = {
-  origin: 'https://deadzedrevival-frontend.onrender.com',
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
