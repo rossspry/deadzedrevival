@@ -4,35 +4,55 @@
   <meta charset="UTF-8" />
   <title>DeadZedRevival</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
-      color: #f2f2f2;
+      font-family: 'Share Tech Mono', monospace;
+      background: radial-gradient(circle, #0a0a0a 0%, #000000 100%);
+      color: #00ff99;
       padding: 20px;
       margin: 0;
+      background-attachment: fixed;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
+      padding: 20px;
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 30px #00ff99;
     }
 
     h1.title {
       text-align: center;
-      font-size: 42px;
-      margin-bottom: 30px;
-      letter-spacing: 1px;
+      font-size: 48px;
+      margin-bottom: 20px;
       color: #00ff99;
-      text-shadow: 2px 2px #000;
+      text-shadow: 0 0 10px #00ff99, 0 0 20px #007755;
+      animation: flicker 2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%   { opacity: 1; text-shadow: 0 0 10px #00ff99, 0 0 20px #007755; }
+      50%  { opacity: 0.95; text-shadow: 0 0 15px #00cc88, 0 0 25px #006644; }
+      100% { opacity: 1; text-shadow: 0 0 10px #00ff99, 0 0 20px #007755; }
     }
 
     .lane {
       position: relative;
       height: 60px;
-      margin: 10px 0;
-      border: 1px solid #333;
+      margin: 12px 0;
+      border: 1px dashed #00ff99;
       overflow: hidden;
-      background-color: #222;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 255, 153, 0.05),
+        rgba(0, 255, 153, 0.05) 10px,
+        rgba(0, 255, 153, 0.02) 10px,
+        rgba(0, 255, 153, 0.02) 20px
+      );
     }
 
     .horse {
@@ -40,53 +60,65 @@
       top: 10px;
       left: 0;
       height: 40px;
-      width: 120px;
-      background-color: #444;
-      color: white;
+      width: 140px;
+      background-color: #00ff99;
+      color: #000;
       font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 8px;
+      box-shadow: 0 0 12px #00ff99;
       transition: left linear;
     }
 
     .winner {
       background-color: gold !important;
       color: black;
+      box-shadow: 0 0 20px gold;
     }
 
     #horsePicker label {
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      display: block;
     }
 
     button {
-      margin-top: 10px;
-      padding: 8px 20px;
-      font-size: 16px;
+      margin-top: 15px;
+      padding: 10px 30px;
+      font-size: 18px;
       background-color: #00ff99;
       border: none;
-      color: black;
+      color: #000;
       cursor: pointer;
       border-radius: 5px;
+      box-shadow: 0 0 10px #00ff99;
+      font-weight: bold;
     }
 
     button:hover {
       background-color: #00cc77;
+      box-shadow: 0 0 20px #00cc77;
     }
 
     #raceResult {
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     #winnerPhoto {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1 class="title">DeadZedRevival</h1>
+
+    <audio id="bgMusic" autoplay loop>
+      <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Komiku/It_Grows/Komiku_-_06_-_Thieves.mp3" type="audio/mpeg">
+      Your browser does not support the audio tag.
+    </audio>
+    <button onclick="toggleMusic()">🔊 Mute / Unmute</button>
 
     <div id="horsePicker"></div>
     <p><small>Select between 2 and 6 horses</small></p>

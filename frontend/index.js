@@ -50,14 +50,13 @@ function renderAnimatedRace(participants, winner) {
     lane.appendChild(horse);
     track.appendChild(lane);
 
-    // Animate after short delay
     setTimeout(() => {
-      const baseDuration = 6; // seconds
-      const delay = index * 0.2; // small offset between horses
+      const baseDuration = 6;
+      const delay = index * 0.2;
       const speedFactor = name === winner ? 1 : 1.2 + index * 0.2;
 
       horse.style.transitionDuration = `${baseDuration * speedFactor}s`;
-      horse.style.left = 'calc(100% - 130px)';
+      horse.style.left = 'calc(100% - 160px)';
     }, 100);
   });
 }
@@ -96,6 +95,15 @@ async function runRace() {
   } catch (error) {
     console.error('Race error:', error);
     document.getElementById('raceResult').innerText = 'Error: ' + error.message;
+  }
+}
+
+function toggleMusic() {
+  const music = document.getElementById('bgMusic');
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause();
   }
 }
 
