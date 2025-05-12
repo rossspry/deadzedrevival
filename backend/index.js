@@ -3,17 +3,17 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// ✅ CORS: allow frontend to talk to backend
-const corsOptions = {
-  origin: 'https://deadzedrevival-1.onrender.com',
-  methods: ['GET', 'POST'],
+// ✅ Expanded CORS config to avoid fetch failures
+app.use(cors({
+  origin: true, // allow any origin during dev
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
-};
+}));
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
-// ✅ API: health check
+// ✅ Health check route
 app.get('/api/status', (req, res) => {
   res.json({ message: 'DeadZedRevival backend is running.' });
 });
