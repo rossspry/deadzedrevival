@@ -3,20 +3,32 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+// ✅ CORS: allow frontend to talk to backend
+const corsOptions = {
+  origin: 'https://deadzedrevival-1.onrender.com',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
-// Health check route for frontend
+// ✅ API: health check
 app.get('/api/status', (req, res) => {
   res.json({ message: 'DeadZedRevival backend is running.' });
 });
 
-// Optional root route
+// ✅ Root route
 app.get('/', (req, res) => {
   res.send('DeadZedRevival backend is running.');
 });
 
-// 🔽 PASTE HERE
+// ✅ Debug route
+app.get('/debug', (req, res) => {
+  res.send('This is the live index.js being served by Render.');
+});
+
+// ✅ Main race route
 app.post('/run-race', (req, res) => {
   const { horses } = req.body;
 
@@ -34,12 +46,7 @@ app.post('/run-race', (req, res) => {
   });
 });
 
-// Optional debug route
-app.get('/debug', (req, res) => {
-  res.send('This is the live index.js being served by Render.');
-});
-
-// 🔼 Leave this last
+// ✅ Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
