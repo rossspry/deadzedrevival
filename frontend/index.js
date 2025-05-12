@@ -31,21 +31,34 @@ function getSelectedHorseIds() {
   return Array.from(checkboxes).map(cb => cb.value);
 }
 
-function renderLanes(participants, winner) {
-  const lanes = document.getElementById('raceLanes');
-  lanes.innerHTML = ''; // clear previous
+function renderAnimatedRace(participants, winner) {
+  const track = document.getElementById('raceTrack');
+  track.innerHTML = '';
 
-  participants.forEach(name => {
+  participants.forEach((name, index) => {
     const lane = document.createElement('div');
     lane.className = 'lane';
-    lane.textContent = name;
+
+    const horse = document.createElement('div');
+    horse.className = 'horse';
+    horse.textContent = name;
 
     if (name === winner) {
-      lane.classList.add('winner');
-      lane.textContent += ' 🏆';
+      horse.classList.add('winner');
     }
 
-    lanes.appendChild(lane);
+    lane.appendChild(horse);
+    track.appendChild(lane);
+
+    // Animate after short delay
+    setTimeout(() => {
+      const baseDuration = 6; // seconds
+      const delay = index * 0.2; // small offset between horses
+      const speedFactor = name === winner ? 1 : 1.2 + index * 0.2;
+
+      horse.style.transitionDuration = `${baseDuration * speedFactor}s`;
+      horse.style.left = 'calc(100% - 130px)';
+    }, 100);
   });
 }
 
@@ -67,7 +80,7 @@ async function runRace() {
     const data = await response.json();
 
     if (response.ok) {
-      renderLanes(data.participants, data.winner);
+      renderAnimatedRace(data.participants, data.winner);
 
       document.getElementById('raceResult').innerHTML = `
         <h2>Race Completed</h2>

@@ -5,16 +5,33 @@
   <title>DeadZedRevival</title>
   <style>
     .lane {
+      position: relative;
+      height: 60px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      overflow: hidden;
+      background-color: #f9f9f9;
+    }
+
+    .horse {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      height: 40px;
+      width: 120px;
+      background-color: #555;
+      color: white;
+      font-weight: bold;
       display: flex;
       align-items: center;
-      height: 50px;
-      border-bottom: 1px solid #ccc;
-      font-size: 18px;
-      padding-left: 10px;
+      justify-content: center;
+      border-radius: 8px;
+      transition: left linear;
     }
+
     .winner {
-      background-color: #dff0d8;
-      font-weight: bold;
+      background-color: gold !important;
+      color: black;
     }
   </style>
 </head>
@@ -25,7 +42,7 @@
   <p><small>Select between 2 and 6 horses</small></p>
   <button onclick="runRace()">Run Race</button>
 
-  <div id="raceLanes" style="margin-top: 20px;"></div>
+  <div id="raceTrack" style="margin-top: 20px;"></div>
 
   <div id="raceResult"></div>
   <div id="winnerPhoto"></div>
