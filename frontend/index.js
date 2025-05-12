@@ -98,13 +98,23 @@ async function runRace() {
   }
 }
 
-function toggleMusic() {
+function toggleMusic(forcePlay = false) {
   const music = document.getElementById('bgMusic');
-  if (music.paused) {
-    music.play();
+  if (music.paused || forcePlay) {
+    music.volume = 1;
+    music.play().catch(err => {
+      console.warn('Music play blocked by browser:', err);
+    });
   } else {
     music.pause();
   }
 }
 
-document.addEventListener('DOMContentLoaded', populateHorseSelector);
+document.addEventListener('DOMContentLoaded', () => {
+  populateHorseSelector();
+
+  // Automatically try to play music after first user interaction
+  document.addEventListener('click', () => {
+    toggleMusic(true);
+  }, { once: true });
+});
