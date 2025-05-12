@@ -6,12 +6,14 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('DeadZedRevival backend is running.');
-});
-
+// Health check route for frontend
 app.get('/api/status', (req, res) => {
   res.json({ message: 'DeadZedRevival backend is running.' });
+});
+
+// Optional root route
+app.get('/', (req, res) => {
+  res.send('DeadZedRevival backend is running.');
 });
 
 app.listen(port, () => {
