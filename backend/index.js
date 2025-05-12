@@ -1,10 +1,9 @@
 const express = require('express');
-const express = require('express');
 const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Only allow your frontend domain
 const corsOptions = {
   origin: 'https://deadzedrevival-frontend.onrender.com',
   optionsSuccessStatus: 200
@@ -13,12 +12,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Root route (optional)
 app.get('/', (req, res) => {
   res.send('DeadZedRevival backend is running.');
 });
 
-// API route for frontend check
 app.get('/api/status', (req, res) => {
   res.json({ message: 'DeadZedRevival backend is running.' });
 });
