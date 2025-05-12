@@ -1,0 +1,103 @@
+{
+    "100623": {
+        "name": "Zed Horse #100623",
+        "realName": "Atlantic Records",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 5,
+        "numberOfWins": 3
+    },
+    "118226": {
+        "name": "Zed Horse #118226",
+        "realName": "Purple Moon Rising",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 11,
+        "numberOfWins": 6
+    },
+    "138067": {
+        "name": "Zed Horse #138067",
+        "realName": "Friendly Neighbor",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 1,
+        "numberOfWins": 1
+    },
+    "148500": {
+        "name": "Zed Horse #148500",
+        "realName": "TeslaModelH",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown"
+    },
+    "151001": {
+        "name": "Zed Horse #151001",
+        "realName": "Mistress of the Dark",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 1
+    },
+    "156512": {
+        "name": "Zed Horse #156512",
+        "realName": "Sir LetsGoBrandon",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 2,
+        "numberOfWins": 1
+    },
+    "186274": {
+        "name": "Zed Horse #186274",
+        "realName": "Yacht Club Guide",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown",
+        "numberOfRaces": 6,
+        "numberOfWins": 2
+    },
+    "349651": {
+        "name": "Zed Horse #349651",
+        "realName": "Royal Cypher",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown"
+    },
+    "387587": {
+        "name": "Zed Horse #387587",
+        "realName": "FireStoned",
+        "level": 0,
+        "winRate": 0,
+        "evo": 0,
+        "class": 0,
+        "genotype": "Z0",
+        "bloodline": "Unknown"
+    }
+}
