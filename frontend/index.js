@@ -1,4 +1,5 @@
-fetch("https://deadzedrevival-backend.onrender.com/api/status")
+fetch("https://deadzedrevival.onrender.com/api/status")
+
   .then(response => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
