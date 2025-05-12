@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
   res.send('DeadZedRevival backend is running.');
 });
 
+app.get('/debug', (req, res) => {
+  res.send('This is the live index.js being served by Render.');
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
