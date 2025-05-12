@@ -8,40 +8,46 @@ const horses = {
   "156512": "Sir LetsGoBrandon"
 };
 
-// Populate the dropdown with display names
+// Render checkboxes for each horse
 function populateHorseSelector() {
-  const selector = document.getElementById('horseSelector');
-  selector.innerHTML = '<option value="">Select a horse</option>';
+  const picker = document.getElementById('horsePicker');
+  picker.innerHTML = '';
+
   for (const id in horses) {
-    const option = document.createElement('option');
-    option.value = id;
-    option.textContent = horses[id];
-    selector.appendChild(option);
+    const label = document.createElement('label');
+    label.style.display = 'block';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = id;
+    checkbox.name = 'horse';
+
+    label.appendChild(checkbox);
+    label.append(` ${horses[id]}`);
+    picker.appendChild(label);
   }
 }
 
-// Send selected horse ID + 2 CPUs to backend for racing
-async function runRace() {
-  const horseSelector = document.getElementById('horseSelector');
-  const selectedId = horseSelector.value;
+// Helper to collect selected IDs
+function getSelectedHorseIds() {
+  const checkboxes = document.querySelectorAll('input[name="horse"]:checked');
+  return Array.from(checkboxes).map(cb => cb.value);
+}
 
-  if (!selectedId) {
-    alert('Please select a horse.');
+// Send race request to backend and show results
+async function runRace() {
+  const selectedIds = getSelectedHorseIds();
+
+  if (selectedIds.length < 2 || selectedIds.length > 6) {
+    alert('Select between 2 and 6 horses.');
     return;
   }
-
-  // Choose up to 2 random CPU horses from the list (excluding selected)
-  const cpuIds = Object.keys(horses).filter(id => id !== selectedId);
-  const shuffled = cpuIds.sort(() => 0.5 - Math.random());
-  const cpuPicks = shuffled.slice(0, 2); // pick 2
-
-  const horseIds = [selectedId, ...cpuPicks];
 
   try {
     const response = await fetch('https://deadzedrevival.onrender.com/run-race', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ horseIds })
+      body: JSON.stringify({ horseIds: selectedIds })
     });
 
     const data = await response.json();
@@ -65,6 +71,5 @@ async function runRace() {
   }
 }
 
-// Run on page load
+// Load horse picker on page load
 document.addEventListener('DOMContentLoaded', populateHorseSelector);
-
