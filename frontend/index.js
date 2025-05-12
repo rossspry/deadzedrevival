@@ -71,5 +71,5 @@ async function runRace() {
   }
 }
 
-// Load horse picker on page load
+// Run when DOM is ready
 document.addEventListener('DOMContentLoaded', populateHorseSelector);
