@@ -43,7 +43,7 @@ function renderAnimatedRace(participants, winner) {
 
     const horse = document.createElement('div');
     horse.className = 'horse';
-    horse.textContent = name;
+    horse.innerHTML = `<img src="/images/horse_gallop.gif" alt="${name}" class="gallop">`;
 
     if (name === winner) {
       horse.classList.add('winner');

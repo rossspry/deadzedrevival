@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    .gallop {
+      height: 100px;
+      width: auto;
+      animation: bob 0.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes bob {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-5px); }
+    }
+  </style>
   <meta charset="UTF-8" />
   <title>DeadZedRevival</title>
   <style>
