@@ -35,6 +35,8 @@ function renderAnimatedRace(participants, winner) {
   const track = document.getElementById('raceTrack');
   track.innerHTML = '';
 
+  const animations = [];
+
   participants.forEach((name, index) => {
     const lane = document.createElement('div');
     lane.className = 'lane';
@@ -50,15 +52,24 @@ function renderAnimatedRace(participants, winner) {
     lane.appendChild(horse);
     track.appendChild(lane);
 
-    setTimeout(() => {
-      const baseDuration = 6;
-      const delay = index * 0.2;
-      const speedFactor = name === winner ? 1 : 1.2 + index * 0.2;
+    const baseDuration = 6;
+    const delay = index * 0.2;
+    const speedFactor = name === winner ? 1 : 1.2 + index * 0.2;
+    const duration = baseDuration * speedFactor * 1000;
 
-      horse.style.transitionDuration = `${baseDuration * speedFactor}s`;
+    setTimeout(() => {
+      horse.style.transitionDuration = `${duration / 1000}s`;
       horse.style.left = 'calc(100% - 160px)';
     }, 100);
+
+    if (name === winner) {
+      animations.push(new Promise(resolve => {
+        setTimeout(resolve, duration + 100);
+      }));
+    }
   });
+
+  return Promise.all(animations);
 }
 
 async function runRace() {
@@ -79,7 +90,7 @@ async function runRace() {
     const data = await response.json();
 
     if (response.ok) {
-      renderAnimatedRace(data.participants, data.winner);
+      await renderAnimatedRace(data.participants, data.winner);
 
       document.getElementById('raceResult').innerHTML = `
         <h2>Race Completed</h2>
